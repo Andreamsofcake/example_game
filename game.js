@@ -27,6 +27,8 @@ Game.prototype = {
 
     // Begin the first frame.
     requestAnimationFrame(this.tick.bind(this));
+
+    this.createMan();
   },
 
   /**
@@ -67,6 +69,19 @@ Game.prototype = {
     this.stage.addChild(walls);    
   },
 
+  createMan: function() {
+    this.man = new PIXI.Graphics();
+
+    this.man.beginFill(0x008000);
+    this.man.moveTo(0, 0);
+    this.man.lineTo(-26, 60);
+    this.man.lineTo(26, 60);
+    this.man.endFill();
+
+    this.stage.addChild(this.ship);
+
+
+  }
   /**
    * Fires at the end of the gameloop to reset and redraw the canvas.
    */
