@@ -78,10 +78,10 @@ Game.prototype = {
     this.man.lineTo(26, 60);
     this.man.endFill();
 
-    this.stage.addChild(this.ship);
+    this.stage.addChild(this.man);
 
 
-  }
+  },
   /**
    * Fires at the end of the gameloop to reset and redraw the canvas.
    */
