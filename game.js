@@ -74,8 +74,9 @@ Game.prototype = {
 
     this.man.beginFill(0x008000);
     this.man.moveTo(0, 0);
-    this.man.lineTo(-26, 60);
-    this.man.lineTo(26, 60);
+    this.man.lineTo(-26, 26);
+    this.man.lineTo(26, 26);
+    this.man.lineTo(26, -26);
     this.man.endFill();
 
     this.stage.addChild(this.man);
