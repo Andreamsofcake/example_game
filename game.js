@@ -77,13 +77,60 @@ Game.prototype = {
     this.man.drawRect(0, 0, 26, 26);
     this.man.endFill();
 
+    this.man.beginFill(0x1495d1);
+    this.man.drawRect(5, 5, 16, 8);
+    this.man.endFill();
+
     this.man.x = Math.round(this._width / 2);
     this.man.y = Math.round(this._height / 2);
 
     this.stage.addChild(this.man);
 
+    //event listeners
+    Mousetrap.bind('w', function(){
+      this.man.rotation = 0;
+      this.moveMan('n');
+    }.bind(this));
+
+    Mousetrap.bind('s', function(){
+      this.man.rotation = 180 * (Math.PI /180);
+      this.moveMan('s');
+    }.bind(this));
+
+    Mousetrap.bind('d', function(){
+      this.man.rotation = 90 * (Math.PI /180);
+      this.moveMan('e');
+    }.bind(this));
+
+    Mousetrap.bind('a', function(){
+      this.man.rotation = 270 * (Math.PI /180);
+      this.moveMan('w');
+    }.bind(this));
 
   },
+
+  moveMan: function(dir)  {
+    var speed = 20;
+
+    switch(dir) {
+      case 'n':
+        this.man.y -= speed;
+        break;
+
+      case 's':
+        this.man.y += speed;
+        break;
+
+      case 'e':
+        this.man.x += speed;
+        break;
+
+      case 'w':
+        this.man.x -= speed;
+        break;
+    }
+  },
+
   /**
    * Fires at the end of the gameloop to reset and redraw the canvas.
    */
