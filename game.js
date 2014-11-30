@@ -10,9 +10,19 @@ var Game = function() {
   // Create the main stage to draw on.
   this.stage = new PIXI.Stage();
 
+  //Set up physics
+  this.world = new p2.World({
+    gravity: [0, 0]
+  });
+
+  //Speed
+  this.speed = 100;
+  this.turnSpeed = 2;
+
   // Start running the game.
   this.build();
 };
+
 
 Game.prototype = {
   /**
@@ -70,40 +80,49 @@ Game.prototype = {
   },
 
   createMan: function() {
-    this.man = new PIXI.Graphics();
 
-    this.man.beginFill(0x008000);
-    this.man.moveTo(0, 0);
-    this.man.drawRect(0, 0, 26, 26);
-    this.man.endFill();
+    this.man = new p2.Body({
+      mass: 1,
+      angularVelocity: 0,
+      damping: 0,
+      angularDamping: 0,
+      position: [Math.round(this._width / 2), Math.round(this._height / 2)]
+    });
+    this.manShape = new p2.Rectangle(52, 69);
+    this.man.addShape(this.manShape);
+    this.world.addBody(this.man);
 
-    this.man.beginFill(0x1495d1);
-    this.man.drawRect(5, 5, 16, 8);
-    this.man.endFill();
+    this.manGraphics = new PIXI.Graphics();
 
-    this.man.x = Math.round(this._width / 2);
-    this.man.y = Math.round(this._height / 2);
+    this.manGraphics.beginFill(0x008000);
+    this.manGraphics.moveTo(0, 0);
+    this.manGraphics.drawRect(0, 0, 26, 26);
+    this.manGraphics.endFill();
 
-    this.stage.addChild(this.man);
+    this.manGraphics.beginFill(0x1495d1);
+    this.manGraphics.drawRect(5, 5, 16, 8);
+    this.manGraphics.endFill();
+
+    this.stage.addChild(this.manGraphics);
 
     //event listeners
     Mousetrap.bind('w', function(){
-      this.man.rotation = 0;
+      this.manGraphics.rotation = 0;
       this.moveMan('n');
     }.bind(this));
 
     Mousetrap.bind('s', function(){
-      this.man.rotation = 180 * (Math.PI /180);
+      this.manGraphics.rotation = 180 * (Math.PI /180);
       this.moveMan('s');
     }.bind(this));
 
     Mousetrap.bind('d', function(){
-      this.man.rotation = 90 * (Math.PI /180);
+      this.manGraphics.rotation = 90 * (Math.PI /180);
       this.moveMan('e');
     }.bind(this));
 
     Mousetrap.bind('a', function(){
-      this.man.rotation = 270 * (Math.PI /180);
+      this.manGraphics.rotation = 270 * (Math.PI /180);
       this.moveMan('w');
     }.bind(this));
 
@@ -114,27 +133,40 @@ Game.prototype = {
 
     switch(dir) {
       case 'n':
-        this.man.y -= speed;
+        this.manGraphics.y -= speed;
         break;
 
       case 's':
-        this.man.y += speed;
+        this.manGraphics.y += speed;
         break;
 
       case 'e':
-        this.man.x += speed;
+        this.manGraphics.x += speed;
         break;
 
       case 'w':
-        this.man.x -= speed;
+        this.manGraphics.x -= speed;
         break;
     }
+  },
+
+  updatePhysics: function() {
+    // Update the position of the graphics based on the
+    // physics simulation position.
+    this.manGraphics.x = this.man.position[0];
+    this.manGraphics.y = this.man.position[1];
+    this.manGraphics.rotation = this.man.angle;
+
+    // Step the physics simulation forward.
+    this.world.step(1 / 60);
   },
 
   /**
    * Fires at the end of the gameloop to reset and redraw the canvas.
    */
   tick: function() {
+    this.updatePhysics();
+
     // Render the stage for the current frame.
     this.renderer.render(this.stage);
 

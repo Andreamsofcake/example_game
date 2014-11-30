@@ -1,33 +1,39 @@
 {
   "name": "Lesson_03",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "bin/pixi.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-
-  "main": "bin/pixi.js",
-
   "author": "",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-jshint": "~0.8",
-        "grunt-contrib-uglify": "~0.2",
-        "grunt-contrib-connect": "~0.5",
-        "grunt-contrib-yuidoc": "~0.5",
-        "grunt-concat-sourcemap": "~0.4",
-        "grunt-contrib-concat": "~0.3",
-        "mocha": "~1.15",
-        "chai": "~1.8",
-        "karma": "~0.12",
-        "karma-chrome-launcher": "~0.1",
-        "karma-firefox-launcher": "~0.1",
-        "karma-mocha": "~0.1",
-        "karma-spec-reporter": "~0.0.6",
-        "grunt-contrib-watch": "~0.5.3"
-    }
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.8",
+    "grunt-contrib-uglify": "~0.2",
+    "grunt-contrib-connect": "~0.5",
+    "grunt-contrib-yuidoc": "~0.5",
+    "grunt-concat-sourcemap": "~0.4",
+    "grunt-contrib-concat": "~0.3",
+    "mocha": "~1.15",
+    "chai": "~1.8",
+    "karma": "~0.12",
+    "karma-chrome-launcher": "~0.1",
+    "karma-firefox-launcher": "~0.1",
+    "karma-mocha": "~0.1",
+    "karma-spec-reporter": "~0.0.6",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "bin": {
+    "Lesson_03": "pixi.dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Andreamsofcake/example_game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Andreamsofcake/example_game/issues"
+  },
+  "homepage": "https://github.com/Andreamsofcake/example_game"
 }
