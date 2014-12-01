@@ -138,7 +138,12 @@ Game.prototype = {
     } else {
       this.man.angularVelocity = 0;
     }
-
+    //add force
+    if (this.keyUp) {
+      var angle =this.man.angle + Math.PI/2;
+      this.man.force[0] -= this.speed * Math.cos(angle);
+      this.man.force[1] -= this.speed * Math.sin(angle);
+    }
 
     // Update the position of the graphics based on the
     // physics simulation position.
