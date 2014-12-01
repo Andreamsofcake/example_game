@@ -19,6 +19,13 @@ var Game = function() {
   this.speed = 100;
   this.turnSpeed = 2;
 
+  window.addEventListener('keydown', function(event) {
+    this.handleKeys(event.keyCode, true);
+  }.bind(this), false);
+  window.addEventListener('keyup', function(event) {
+    this.handleKeys(event.keyCode, false);
+  }.bind(this), false);
+
   // Start running the game.
   this.build();
 };
@@ -64,6 +71,22 @@ Game.prototype = {
     }
   },
 
+  handleKeys: function(code, state) {
+    switch (code) {
+      case 65: // A
+        this.keyLeft = state;
+        break;
+
+      case 68: // D
+        this.keyRight = state;
+        break;
+
+      case 87: // W
+        this.keyUp = state;
+        break;
+    }
+  },
+
   /**
    * Draw the boundaries of the space arena.
    */
@@ -104,50 +127,6 @@ Game.prototype = {
     this.manGraphics.endFill();
 
     this.stage.addChild(this.manGraphics);
-
-    //event listeners
-    Mousetrap.bind('w', function(){
-      this.manGraphics.rotation = 0;
-      this.moveMan('n');
-    }.bind(this));
-
-    Mousetrap.bind('s', function(){
-      this.manGraphics.rotation = 180 * (Math.PI /180);
-      this.moveMan('s');
-    }.bind(this));
-
-    Mousetrap.bind('d', function(){
-      this.manGraphics.rotation = 90 * (Math.PI /180);
-      this.moveMan('e');
-    }.bind(this));
-
-    Mousetrap.bind('a', function(){
-      this.manGraphics.rotation = 270 * (Math.PI /180);
-      this.moveMan('w');
-    }.bind(this));
-
-  },
-
-  moveMan: function(dir)  {
-    var speed = 20;
-
-    switch(dir) {
-      case 'n':
-        this.manGraphics.y -= speed;
-        break;
-
-      case 's':
-        this.manGraphics.y += speed;
-        break;
-
-      case 'e':
-        this.manGraphics.x += speed;
-        break;
-
-      case 'w':
-        this.manGraphics.x -= speed;
-        break;
-    }
   },
 
   updatePhysics: function() {
