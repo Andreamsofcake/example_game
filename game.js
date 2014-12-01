@@ -16,7 +16,7 @@ var Game = function() {
   });
 
   //Speed
-  this.speed = 100;
+  this.speed = 800;
   this.turnSpeed = 2;
 
   window.addEventListener('keydown', function(event) {
