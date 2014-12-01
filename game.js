@@ -130,6 +130,16 @@ Game.prototype = {
   },
 
   updatePhysics: function() {
+    // Angular velocities
+    if (this.keyLeft) {
+      this.man.angularVelocity = -1 * this.turnSpeed;
+    } else if (this.keyRight) {
+      this.man.angularVelocity = this.turnSpeed;
+    } else {
+      this.man.angularVelocity = 0;
+    }
+
+
     // Update the position of the graphics based on the
     // physics simulation position.
     this.manGraphics.x = this.man.position[0];
