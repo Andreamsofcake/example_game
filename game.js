@@ -17,7 +17,7 @@ var Game = function() {
 
   //Speed
   this.speed = 800;
-  this.turnSpeed = 2;
+  this.turnSpeed = 3;
 
   window.addEventListener('keydown', function(event) {
     this.handleKeys(event.keyCode, true);
@@ -44,6 +44,8 @@ Game.prototype = {
 
     // Setup the boundaries of the game's arena.
     this.setupBoundaries();
+
+    this.createEnemies();
 
     // Begin the first frame.
     requestAnimationFrame(this.tick.bind(this));
@@ -170,6 +172,27 @@ Game.prototype = {
       this.enemyBodies.push(enemy);
       this.enemyGraphics.push(enemyGraphics);
     }.bind(this), 1000);
+  },
+
+   /**
+   * Handle key presses and filter them.
+   * @param  {Number} code  Key code pressed.
+   * @param  {Boolean} state true/false
+   */
+  handleKeys: function(code, state) {
+    switch (code) {
+      case 65: // A
+        this.keyLeft = state;
+        break;
+
+      case 68: // D
+        this.keyRight = state;
+        break;
+
+      case 87: // W
+        this.keyUp = state;
+        break;
+    }
   },
 
   updatePhysics: function() {
