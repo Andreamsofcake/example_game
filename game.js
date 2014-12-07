@@ -158,10 +158,10 @@ Game.prototype = {
 
       // Create the graphics object.
       var enemyGraphics = new PIXI.Graphics();
-      enemyGraphics.beginFill(0x38d41a);
+      enemyGraphics.beginFill(0x800080);
       enemyGraphics.drawCircle(x, y, 20);
       enemyGraphics.endFill();
-      enemyGraphics.beginFill(0x2aff00);
+      enemyGraphics.beginFill(0x7F525D);
       enemyGraphics.lineStyle(1, 0x239d0b, 1);
       enemyGraphics.drawCircle(x, y, 10);
       enemyGraphics.endFill();
