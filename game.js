@@ -124,11 +124,11 @@ Game.prototype = {
 
     this.manGraphics.beginFill(0x008000);
     this.manGraphics.moveTo(0, 0);
-    this.manGraphics.drawRect(0, 0, 26, 26);
+    this.manGraphics.drawRect(0, 0, 45, 45);
     this.manGraphics.endFill();
 
     this.manGraphics.beginFill(0x1495d1);
-    this.manGraphics.drawRect(5, 5, 16, 8);
+    this.manGraphics.drawRect(5, 5, 35, 8);
     this.manGraphics.endFill();
 
     this.stage.addChild(this.manGraphics);
