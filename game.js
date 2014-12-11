@@ -2,13 +2,14 @@ var Game = function() {
   // Set the width and height of the scene.
   this._width = 1280;
   this._height = 720;
-
+  // this.setBackgroundColor(0x008000);
+  // 
   // Setup the rendering surface.
   this.renderer = new PIXI.CanvasRenderer(this._width, this._height);
   document.body.appendChild(this.renderer.view);
 
   // Create the main stage to draw on.
-  this.stage = new PIXI.Stage();
+  this.stage = new PIXI.Stage(0x2E0854);
 
   //Set up physics
   this.world = new p2.World({
@@ -97,14 +98,13 @@ Game.prototype = {
    */
   setupBoundaries: function() {
     var walls = new PIXI.Graphics();
-    walls.beginFill(0xFFFFFF, 0.5);
+    walls.beginFill(0x0000FF, 0.5);
     walls.drawRect(0, 0, this._width, 10);
     walls.drawRect(this._width - 10, 10, 10, this._height - 20);
     walls.drawRect(0, this._height - 10, this._width, 10);
     walls.drawRect(0, 10, 10, this._height - 20);
-    
     // Attach the walls to the stage.
-    this.stage.addChild(walls);    
+    this.stage.addChild(walls);
   },
 
   createMan: function() {
@@ -158,7 +158,7 @@ Game.prototype = {
 
       // Create the graphics object.
       var enemyGraphics = new PIXI.Graphics();
-      enemyGraphics.beginFill(0x800080);
+      enemyGraphics.beginFill(0xffa500);
       enemyGraphics.drawCircle(x, y, 20);
       enemyGraphics.endFill();
       enemyGraphics.beginFill(0x7F525D);
