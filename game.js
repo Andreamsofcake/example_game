@@ -153,6 +153,7 @@ Game.prototype = {
         angularVelocity: va
       });
       var enemyShape = new p2.Circle(20);
+      enemyShape.sensor = true;
       enemy.addShape(enemyShape);
       this.world.addBody(enemy);
 
@@ -172,6 +173,12 @@ Game.prototype = {
       this.enemyBodies.push(enemy);
       this.enemyGraphics.push(enemyGraphics);
     }.bind(this), 1000);
+
+    this.world.on('beginContact', function(event) {
+      if (event.bodyB.id === this.ship.id) {
+        this.removeObjs.push(event.bodyA);
+      }
+    }.bind(this));
   },
 
    /**
