@@ -29,6 +29,7 @@ var Game = function() {
 
   this.enemyBodies = [];
   this.enemyGraphics = [];
+  this.removeObjs = [];
 
   // Start running the game.
   this.build();
@@ -160,11 +161,11 @@ Game.prototype = {
       // Create the graphics object.
       var enemyGraphics = new PIXI.Graphics();
       enemyGraphics.beginFill(0xffa500);
-      enemyGraphics.drawCircle(x, y, 20);
+      enemyGraphics.drawCircle(0, 0, 20);
       enemyGraphics.endFill();
       enemyGraphics.beginFill(0x7F525D);
       enemyGraphics.lineStyle(1, 0x239d0b, 1);
-      enemyGraphics.drawCircle(x, y, 10);
+      enemyGraphics.drawCircle(0, 0, 10);
       enemyGraphics.endFill();
 
       this.stage.addChild(enemyGraphics);
@@ -175,7 +176,7 @@ Game.prototype = {
     }.bind(this), 1000);
 
     this.world.on('beginContact', function(event) {
-      if (event.bodyB.id === this.ship.id) {
+      if (event.bodyB.id === this.man.id) {
         this.removeObjs.push(event.bodyA);
       }
     }.bind(this));
@@ -242,6 +243,19 @@ Game.prototype = {
 
     // Step the physics simulation forward.
     this.world.step(1 / 60);
+
+    for (i=0; i<this.removeObjs.length; i++) {
+      this.world.removeBody(this.removeObjs[i]);
+
+      var index = this.enemyBodies.indexOf(this.removeObjs[i]);
+      if (index) {
+        this.enemyBodies.splice(index, 1);
+        this.stage.removeChild(this.enemyGraphics[index]);
+        this.enemyGraphics.splice(index, 1);
+      }
+    }
+
+    this.removeObjs.length = 0;
   },
 
   /**
