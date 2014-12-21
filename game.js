@@ -2,10 +2,13 @@ var Game = function() {
   // Set the width and height of the scene.
   this._width = 1280;
   this._height = 720;
-  // this.setBackgroundColor(0x008000);
-  // 
+
+  //BackGround
+  this.background = new PIXI.CanvasRenderer(this._width, this._height);
+  document.body.appendChild(this.backgroundrend.view);
+
   // Setup the rendering surface.
-  this.renderer = new PIXI.CanvasRenderer(this._width, this._height);
+  this.renderer = new PIXI.CanvasRenderer(this._width, this._height, null, true);
   document.body.appendChild(this.renderer.view);
 
   // Create the main stage to draw on.
@@ -17,6 +20,7 @@ var Game = function() {
   });
 
   //Speed
+  this.text = "Game";
   this.speed = 800;
   this.turnSpeed = 3;
 
