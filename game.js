@@ -4,16 +4,16 @@ var Game = function() {
   this._height = 720;
 
   //BackGround
-  this.bgRenderer = new PIXI.CanvasRenderer(this._width, this._height);
+  this.bgRenderer = new PIXI.CanvasRenderer(this._width, this._height, false);
   document.body.appendChild(this.bgRenderer.view);
   this.bgStage = new PIXI.Stage();
 
   // Setup the rendering surface.
-  this.renderer = new PIXI.CanvasRenderer(this._width, this._height, null, true);
+  this.renderer = new PIXI.CanvasRenderer(this._width, this._height);
   document.body.appendChild(this.renderer.view);
 
   // Create the main stage to draw on.
-  this.stage = new PIXI.Stage(0x2E0854);
+  this.stage = new PIXI.Stage();
 
   //Set up physics
   this.world = new p2.World({
@@ -22,7 +22,7 @@ var Game = function() {
 
   //Speed
   this.text = "Game";
-  this.speed = 800;
+  this.speed = 500;
   this.turnSpeed = 3;
 
   window.addEventListener('keydown', function(event) {
