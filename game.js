@@ -4,8 +4,9 @@ var Game = function() {
   this._height = 720;
 
   //BackGround
-  this.background = new PIXI.CanvasRenderer(this._width, this._height);
-  document.body.appendChild(this.backgroundrend.view);
+  this.bgRenderer = new PIXI.CanvasRenderer(this._width, this._height);
+  document.body.appendChild(this.bgRenderer.view);
+  this.bgStage = new PIXI.Stage();
 
   // Setup the rendering surface.
   this.renderer = new PIXI.CanvasRenderer(this._width, this._height, null, true);
@@ -51,12 +52,12 @@ Game.prototype = {
     // Setup the boundaries of the game's arena.
     this.setupBoundaries();
 
+    this.createMan();
+
     this.createEnemies();
 
     // Begin the first frame.
     requestAnimationFrame(this.tick.bind(this));
-
-    this.createMan();
   },
 
   /**
@@ -78,24 +79,10 @@ Game.prototype = {
       star.endFill();
 
       // Attach the star to the stage.
-      this.stage.addChild(star);
+      this.bgStage.addChild(star);
     }
-  },
-
-  handleKeys: function(code, state) {
-    switch (code) {
-      case 65: // A
-        this.keyLeft = state;
-        break;
-
-      case 68: // D
-        this.keyRight = state;
-        break;
-
-      case 87: // W
-        this.keyUp = state;
-        break;
-    }
+    //calls stars to stage
+    this.bgRenderer.render(this.bgStage);
   },
 
   /**
@@ -109,7 +96,8 @@ Game.prototype = {
     walls.drawRect(0, this._height - 10, this._width, 10);
     walls.drawRect(0, 10, 10, this._height - 20);
     // Attach the walls to the stage.
-    this.stage.addChild(walls);
+    this.bgStage.addChild(walls);
+    this.bgRenderer.render(this.bgStage);
   },
 
   createMan: function() {
