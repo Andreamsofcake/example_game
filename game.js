@@ -4,7 +4,7 @@ var Game = function() {
   this._height = 720;
 
   //BackGround
-  this.bgRenderer = new PIXI.CanvasRenderer(this._width, this._height);
+  this.bgRenderer = new PIXI.CanvasRenderer(this._width, this._height, this.transparent=true);
   document.body.appendChild(this.bgRenderer.view);
   this.bgStage = new PIXI.Stage();
 
