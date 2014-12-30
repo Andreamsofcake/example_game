@@ -1,15 +1,17 @@
+'use strict';
+
 var Game = function() {
   // Set the width and height of the scene.
   this._width = 1280;
   this._height = 720;
 
   //BackGround
-  this.bgRenderer = new PIXI.CanvasRenderer(this._width, this._height);
-  document.body.appendChild(this.bgRenderer.view);
-  this.bgStage = new PIXI.Stage();
+  // this.bgRenderer = new PIXI.CanvasRenderer(250, 250);
+  // document.body.appendChild(this.bgRenderer.view);
+  // this.bgStage = new PIXI.Stage();
 
   // Setup the rendering surface.
-  this.renderer = new PIXI.CanvasRenderer(this._width, this._height);
+  this.renderer = new PIXI.CanvasRenderer(this._width, this._height, [this.transparent=true]);
   document.body.appendChild(this.renderer.view);
 
   // Create the main stage to draw on.
@@ -21,7 +23,6 @@ var Game = function() {
   });
 
   //Speed
-  this.text = "Game";
   this.speed = 900;
   this.turnSpeed = 3;
 
@@ -79,10 +80,10 @@ Game.prototype = {
       star.endFill();
 
       // Attach the star to the stage.
-      this.bgStage.addChild(star);
+      // this.bgStage.addChild(star);
     }
     //calls stars to stage
-    this.bgRenderer.render(this.bgStage);
+    // this.bgRenderer.render(this.bgStage);
   },
 
   /**
@@ -96,8 +97,8 @@ Game.prototype = {
     walls.drawRect(0, this._height - 10, this._width, 10);
     walls.drawRect(0, 10, 10, this._height - 20);
     // Attach the walls to the stage.
-    this.bgStage.addChild(walls);
-    this.bgRenderer.render(this.bgStage);
+    // this.bgStage.addChild(walls);
+    // this.bgRenderer.render(this.bgStage);
   },
 
   createMan: function() {
