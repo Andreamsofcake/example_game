@@ -6,9 +6,9 @@ var Game = function() {
   this._height = 720;
 
   //BackGround
-  // this.bgRenderer = new PIXI.CanvasRenderer(250, 250);
-  // document.body.appendChild(this.bgRenderer.view);
-  // this.bgStage = new PIXI.Stage();
+  this.bgRenderer = new PIXI.CanvasRenderer(250, 250);
+  document.body.appendChild(this.bgRenderer.view);
+  this.bgStage = new PIXI.Stage();
 
   // Setup the rendering surface.
   this.renderer = new PIXI.CanvasRenderer(this._width, this._height, [this.transparent=true]);
@@ -80,10 +80,10 @@ Game.prototype = {
       star.endFill();
 
       // Attach the star to the stage.
-      // this.bgStage.addChild(star);
+      this.bgStage.addChild(star);
     }
     //calls stars to stage
-    // this.bgRenderer.render(this.bgStage);
+    this.bgRenderer.render(this.bgStage);
   },
 
   /**
