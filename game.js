@@ -24,7 +24,7 @@ var Game = function() {
 
   //Speed
   this.speed = 900;
-  this.turnSpeed = 3;
+  this.turnpeed = 3;
 
   window.addEventListener('keydown', function(event) {
     this.handleKeys(event.keyCode, true);
